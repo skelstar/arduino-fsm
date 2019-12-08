@@ -49,7 +49,7 @@ public:
 
   void trigger(int event);
   void run_machine();
-  State* getCurrentState();
+  State* get_current_state();
 
 private:
   struct Transition
