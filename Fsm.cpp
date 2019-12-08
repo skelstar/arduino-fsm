@@ -147,7 +147,7 @@ void Fsm::run_machine()
   Fsm::check_timed_transitions();
 }
 
-State* Fsm::getCurrentState() {
+State* Fsm::get_current_state() {
   return m_current_state;
 }
 
