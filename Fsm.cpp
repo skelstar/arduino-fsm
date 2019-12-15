@@ -16,11 +16,12 @@
 #include "Fsm.h"
 
 
-State::State(void (*on_enter)(), void (*on_state)(), void (*on_exit)())
+State::State(uint8_t state_id, void (*on_enter)(), void (*on_state)(), void (*on_exit)())
 : on_enter(on_enter),
   on_state(on_state),
   on_exit(on_exit)
 {
+  id = state_id;
 }
 
 
@@ -84,9 +85,11 @@ Fsm::Transition Fsm::create_transition(State* state_from, State* state_to,
 {
   Transition t;
   t.state_from = state_from;
+  t.state_to_id = state_to->id;
   t.state_to = state_to;
   t.event = event;
   t.on_transition = on_transition;
+  Serial.printf("Created transition: %d\n", state_to->id);
 
   return t;
 }
@@ -153,7 +156,7 @@ State* Fsm::get_current_state() {
 
 void Fsm::make_transition(Transition* transition)
 {
- 
+  m_from_id = m_current_id;
   // Execute the handlers in the correct order.
   if (transition->state_from->on_exit != NULL)
     transition->state_from->on_exit();
@@ -165,8 +168,9 @@ void Fsm::make_transition(Transition* transition)
     transition->state_to->on_enter();
   
   m_current_state = transition->state_to;
+  m_current_id = transition->state_to->id;
 
-  //Initialice all timed transitions from m_current_state
+  //Initialise all timed transitions from m_current_state
   unsigned long now = millis();
   for (int i = 0; i < m_num_timed_transitions; ++i)
   {
@@ -174,5 +178,9 @@ void Fsm::make_transition(Transition* transition)
     if (ttransition->transition.state_from == m_current_state)
       ttransition->start = now;
   }
+}
 
+uint8_t Fsm::get_from_state()
+{
+  return m_from_id;
 }
