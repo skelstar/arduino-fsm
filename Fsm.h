@@ -26,7 +26,8 @@
 
 struct State
 {
-  State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
+  State(uint8_t id, void (*on_enter)(), void (*on_state)(), void (*on_exit)());
+  uint8_t id;
   void (*on_enter)();
   void (*on_state)();
   void (*on_exit)();
@@ -50,12 +51,14 @@ public:
   void trigger(int event);
   void run_machine();
   State* get_current_state();
+  uint8_t get_from_state();
 
 private:
   struct Transition
   {
     State* state_from;
     State* state_to;
+    uint8_t state_to_id;
     int event;
     void (*on_transition)();
 
@@ -73,6 +76,8 @@ private:
   void make_transition(Transition* transition);
 
 private:
+  uint8_t m_from_id;
+  uint8_t m_current_id;
   State* m_current_state;
   Transition* m_transitions;
   int m_num_transitions;
