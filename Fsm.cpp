@@ -38,7 +38,7 @@ Fsm::Fsm(State* initial_state)
 Fsm::~Fsm()
 {
   free(m_transitions);
-  free(m_timed_transitions);
+  free(m_timed_transitions);  
   m_transitions = NULL;
   m_timed_transitions = NULL;
 }
@@ -89,8 +89,7 @@ Fsm::Transition Fsm::create_transition(State* state_from, State* state_to,
   t.state_to = state_to;
   t.event = event;
   t.on_transition = on_transition;
-  Serial.printf("Created transition: %d\n", state_to->id);
-
+  
   return t;
 }
 
