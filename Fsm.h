@@ -26,6 +26,7 @@
 
 struct State
 {
+  State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
   State(uint8_t id, void (*on_enter)(), void (*on_state)(), void (*on_exit)());
   uint8_t id;
   void (*on_enter)();
