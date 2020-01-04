@@ -16,6 +16,13 @@
 #include "Fsm.h"
 
 
+State::State(void (*on_enter)(), void (*on_state)(), void (*on_exit)())
+: on_enter(on_enter),
+  on_state(on_state),
+  on_exit(on_exit)
+{
+}
+
 State::State(uint8_t state_id, void (*on_enter)(), void (*on_state)(), void (*on_exit)())
 : on_enter(on_enter),
   on_state(on_state),
