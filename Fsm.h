@@ -16,17 +16,16 @@
 #ifndef FSM_H
 #define FSM_H
 
-
 #if defined(ARDUINO) && ARDUINO >= 100
-  #include <Arduino.h>
+#include <Arduino.h>
 #else
-  #include <WProgram.h>
+#include <WProgram.h>
 #endif
-
 
 struct State
 {
   State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
+  State(void (*on_enter)());
   State(uint8_t id, void (*on_enter)(), void (*on_state)(), void (*on_exit)());
   uint8_t id;
   void (*on_enter)();
@@ -34,35 +33,33 @@ struct State
   void (*on_exit)();
 };
 
-
 class Fsm
 {
 public:
-  Fsm(State* initial_state);
+  Fsm(State *initial_state);
   ~Fsm();
 
-  void add_transition(State* state_from, State* state_to, int event,
+  void add_transition(State *state_from, State *state_to, int event,
                       void (*on_transition)());
 
-  void add_timed_transition(State* state_from, State* state_to,
+  void add_timed_transition(State *state_from, State *state_to,
                             unsigned long interval, void (*on_transition)());
 
   void check_timed_transitions();
 
   void trigger(int event);
   void run_machine();
-  State* get_current_state();
+  State *get_current_state();
   uint8_t get_from_state();
 
 private:
   struct Transition
   {
-    State* state_from;
-    State* state_to;
+    State *state_from;
+    State *state_to;
     uint8_t state_to_id;
     int event;
     void (*on_transition)();
-
   };
   struct TimedTransition
   {
@@ -71,22 +68,21 @@ private:
     unsigned long interval;
   };
 
-  static Transition create_transition(State* state_from, State* state_to,
+  static Transition create_transition(State *state_from, State *state_to,
                                       int event, void (*on_transition)());
 
-  void make_transition(Transition* transition);
+  void make_transition(Transition *transition);
 
 private:
   uint8_t m_from_id;
   uint8_t m_current_id;
-  State* m_current_state;
-  Transition* m_transitions;
+  State *m_current_state;
+  Transition *m_transitions;
   int m_num_transitions;
 
-  TimedTransition* m_timed_transitions;
+  TimedTransition *m_timed_transitions;
   int m_num_timed_transitions;
   bool m_initialized;
 };
-
 
 #endif
