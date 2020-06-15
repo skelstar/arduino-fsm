@@ -24,9 +24,9 @@
 
 struct State
 {
+  State(uint8_t id, void (*on_enter)(), void (*on_state)(), void (*on_exit)());
   State(void (*on_enter)(), void (*on_state)(), void (*on_exit)());
   State(void (*on_enter)());
-  State(uint8_t id, void (*on_enter)(), void (*on_state)(), void (*on_exit)());
   uint8_t id;
   void (*on_enter)();
   void (*on_state)();
@@ -51,6 +51,8 @@ public:
   void run_machine();
   State *get_current_state();
   uint8_t get_from_state();
+
+  bool revisit() { return _revisit; }
 
 private:
   struct Transition
@@ -79,6 +81,7 @@ private:
   State *m_current_state;
   Transition *m_transitions;
   int m_num_transitions;
+  bool _revisit;
 
   TimedTransition *m_timed_transitions;
   int m_num_timed_transitions;
