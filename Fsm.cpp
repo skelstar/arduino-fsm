@@ -15,6 +15,14 @@
 
 #include "Fsm.h"
 
+State::State(uint8_t state_id, void (*on_enter)(), void (*on_state)(), void (*on_exit)())
+    : on_enter(on_enter),
+      on_state(on_state),
+      on_exit(on_exit)
+{
+  id = state_id;
+}
+
 State::State(void (*on_enter)(), void (*on_state)(), void (*on_exit)())
     : on_enter(on_enter),
       on_state(on_state),
@@ -27,14 +35,6 @@ State::State(void (*on_enter)())
       on_state(NULL),
       on_exit(NULL)
 {
-}
-
-State::State(uint8_t state_id, void (*on_enter)(), void (*on_state)(), void (*on_exit)())
-    : on_enter(on_enter),
-      on_state(on_state),
-      on_exit(on_exit)
-{
-  id = state_id;
 }
 
 Fsm::Fsm(State *initial_state)
@@ -164,6 +164,8 @@ State *Fsm::get_current_state()
 
 void Fsm::make_transition(Transition *transition)
 {
+  _revisit = m_from_id == m_current_id;
+
   m_from_id = m_current_id;
   // Execute the handlers in the correct order.
   if (transition->state_from->on_exit != NULL)
