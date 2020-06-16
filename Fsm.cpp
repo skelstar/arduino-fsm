@@ -110,6 +110,7 @@ void Fsm::trigger(int event)
       if (m_transitions[i].state_from == m_current_state &&
           m_transitions[i].event == event)
       {
+        _lastEvent = event;
         Fsm::make_transition(&(m_transitions[i]));
         return;
       }
@@ -161,6 +162,8 @@ State *Fsm::get_current_state()
 {
   return m_current_state;
 }
+
+int Fsm::lastEvent() { return _lastEvent; }
 
 void Fsm::make_transition(Transition *transition)
 {
