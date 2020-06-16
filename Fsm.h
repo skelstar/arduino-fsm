@@ -49,6 +49,7 @@ public:
 
   void trigger(int event);
   void run_machine();
+  int lastEvent();
   State *get_current_state();
   uint8_t get_from_state();
 
@@ -82,6 +83,7 @@ private:
   Transition *m_transitions;
   int m_num_transitions;
   bool _revisit;
+  int _lastEvent;
 
   TimedTransition *m_timed_transitions;
   int m_num_timed_transitions;
