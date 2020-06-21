@@ -35,6 +35,8 @@ struct State
 
 class Fsm
 {
+  typedef const char *(*GetEventNameCb)(int ev);
+
 public:
   Fsm(State *initial_state);
   ~Fsm();
@@ -52,6 +54,8 @@ public:
   int lastEvent();
   State *get_current_state();
   uint8_t get_from_state();
+  void setGetEventName(GetEventNameCb getEventNameCb);
+  void print(const char *stateName, bool includeEvent = true);
 
   bool revisit() { return _revisit; }
 
@@ -88,6 +92,8 @@ private:
   TimedTransition *m_timed_transitions;
   int m_num_timed_transitions;
   bool m_initialized;
+
+  GetEventNameCb _getEventNameCb;
 };
 
 #endif
