@@ -197,3 +197,23 @@ uint8_t Fsm::get_from_state()
 {
   return m_from_id;
 }
+
+void Fsm::setGetEventName(GetEventNameCb getEventNameCb)
+{
+  _getEventNameCb = getEventNameCb;
+}
+
+void Fsm::print(const char *stateName, bool includeEvent)
+{
+  char debugTime[10];
+  sprintf(debugTime, "%6.1fs", millis() / 1000);
+
+  if (includeEvent)
+  {
+    Serial.printf("[%s] %s --> %s\n", debugTime, stateName, _getEventNameCb(_lastEvent));
+  }
+  else
+  {
+    Serial.printf("[%s] %s\n", debugTime, stateName);
+  }
+}
