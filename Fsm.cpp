@@ -206,7 +206,7 @@ void Fsm::setGetEventName(GetEventNameCb getEventNameCb)
 void Fsm::print(const char *stateName, bool includeEvent)
 {
   char debugTime[10];
-  sprintf(debugTime, "%6.1fs", millis() / 1000);
+  sprintf(debugTime, "%6.1fs", millis()/1000.0);
 
   if (includeEvent)
   {
