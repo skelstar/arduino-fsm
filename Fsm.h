@@ -36,6 +36,7 @@ struct State
 class Fsm
 {
   typedef const char *(*GetEventNameCb)(int ev);
+  typedef void (*EventTriggeredCb)(int ev);
 
 public:
   Fsm(State *initial_state);
@@ -55,6 +56,7 @@ public:
   State *get_current_state();
   uint8_t get_from_state();
   void setGetEventName(GetEventNameCb getEventNameCb);
+  void setEventTriggeredCb(EventTriggeredCb eventTriggeredCb);
   void print(const char *stateName, bool includeEvent = true);
 
   bool revisit() { return _revisit; }
@@ -94,6 +96,7 @@ private:
   bool m_initialized;
 
   GetEventNameCb _getEventNameCb;
+  EventTriggeredCb _eventTriggeredCb;
 };
 
 #endif
