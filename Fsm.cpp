@@ -205,6 +205,11 @@ void Fsm::setGetEventName(GetEventNameCb getEventNameCb)
   _getEventNameCb = getEventNameCb;
 }
 
+void Fsm::setEventTriggeredCb(EventTriggeredCb eventTriggeredCb)
+{
+  _eventTriggeredCb = eventTriggeredCb;
+}
+
 void Fsm::print(const char *stateName, bool includeEvent)
 {
   char debugTime[10];
