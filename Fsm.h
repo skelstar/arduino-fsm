@@ -96,7 +96,7 @@ private:
   bool m_initialized;
 
   GetEventNameCb _getEventNameCb = nullptr;
-  EventTriggeredCb _eventTriggeredCb;
+  EventTriggeredCb _eventTriggeredCb = nullptr;
 };
 
 #endif

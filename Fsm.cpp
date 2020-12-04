@@ -112,7 +112,7 @@ void Fsm::trigger(int event)
       {
         _lastEvent = event;
         Fsm::make_transition(&(m_transitions[i]));
-        if (_eventTriggeredCb != NULL)
+        if (_eventTriggeredCb != nullptr)
           _eventTriggeredCb(event);
         return;
       }
