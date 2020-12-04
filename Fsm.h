@@ -95,7 +95,7 @@ private:
   int m_num_timed_transitions;
   bool m_initialized;
 
-  GetEventNameCb _getEventNameCb;
+  GetEventNameCb _getEventNameCb = nullptr;
   EventTriggeredCb _eventTriggeredCb;
 };
 

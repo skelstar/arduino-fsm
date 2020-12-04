@@ -113,7 +113,7 @@ void Fsm::trigger(int event)
         _lastEvent = event;
         Fsm::make_transition(&(m_transitions[i]));
         if (_eventTriggeredCb != NULL)
-            _eventTriggeredCb(event);
+          _eventTriggeredCb(event);
         return;
       }
     }
@@ -213,11 +213,16 @@ void Fsm::setEventTriggeredCb(EventTriggeredCb eventTriggeredCb)
 void Fsm::print(const char *stateName, bool includeEvent)
 {
   char debugTime[10];
-  sprintf(debugTime, "%6.1fs", millis()/1000.0);
+  sprintf(debugTime, "%6.1fs", millis() / 1000.0);
 
   if (includeEvent)
   {
-    Serial.printf("[%s] %s --> %s\n", debugTime, stateName, _getEventNameCb(_lastEvent));
+    Serial.printf("[%s] %s --> %s\n",
+                  debugTime,
+                  stateName,
+                  _getEventNameCb != nullptr
+                      ? _getEventNameCb(_lastEvent)
+                      : "WARNING: _getEventNameCb() == nullptr");
   }
   else
   {
