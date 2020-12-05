@@ -52,6 +52,7 @@ public:
 
   void trigger(int event);
   void run_machine();
+  uint8_t getCurrentStateId();
   int lastEvent();
   State *get_current_state();
   uint8_t get_from_state();

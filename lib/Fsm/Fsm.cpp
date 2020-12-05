@@ -160,6 +160,11 @@ void Fsm::run_machine()
   Fsm::check_timed_transitions();
 }
 
+uint8_t Fsm::getCurrentStateId()
+{
+  return m_current_id;
+}
+
 State *Fsm::get_current_state()
 {
   return m_current_state;
