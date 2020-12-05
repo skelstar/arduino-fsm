@@ -18,15 +18,53 @@ const char *getEventName(uint8_t ev)
   return ev >= StateA::LastEvent ? "OUT OF RANGE" : StateA::eventName[ev];
 }
 
+#include <enumManager.h>
+#include <iostream>
+
+namespace StateB
+{
+  enum Event
+  {
+    STATEB_0 = 0,
+    STATEB_1,
+    STATEB_2,
+    STATEB_3,
+    Length
+  };
+
+  std::string names2[] = {
+      "STATEB_0",
+      "STATEB_1",
+      "STATEB_2",
+      "STATEB_3",
+  };
+
+  const char *names[] = {
+      "STATEB_0",
+      "STATEB_1",
+      "STATEB_2",
+      "STATEB_3",
+  };
+
+} // namespace StateB
+
+EnumManager<StateB::Event> stateB(StateB::names2);
+
 //-----------------------------------------
 void setup()
 {
   Serial.begin(115200);
   Serial.printf("\n\nReady\n");
 
-  fsmManager.begin(&StateA::fsm, "-->STATE: %s %s\n");
-  fsmManager.setGetEventNameCallback(getEventName);
+  fsmManager.begin(&StateA::fsm, "-->STATE: %s | %s\n");
+  fsmManager.setGetEventNameCallback([](uint8_t ev) {
+    return ev >= StateA::LastEvent ? "OUT OF RANGE" : StateA::eventName[ev];
+  });
   fsmManager.setGetStateNameCallback(getStateName);
+
+  stateB.printNames();
+  Serial.printf("getName: %s\n", stateB.getName(StateB::STATEB_0));
+  Serial.printf("getName: %s\n", stateB.getName(10));
 
   StateA::addTransitions();
 }
