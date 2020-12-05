@@ -32,14 +32,7 @@ namespace StateB
     Length
   };
 
-  std::string names2[] = {
-      "STATEB_0",
-      "STATEB_1",
-      "STATEB_2",
-      "STATEB_3",
-  };
-
-  const char *names[] = {
+  std::string names[] = {
       "STATEB_0",
       "STATEB_1",
       "STATEB_2",
@@ -48,7 +41,7 @@ namespace StateB
 
 } // namespace StateB
 
-EnumManager<StateB::Event> stateB(StateB::names2);
+EnumManager<StateB::Event> stateB(StateB::names);
 
 //-----------------------------------------
 void setup()
