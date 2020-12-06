@@ -1,9 +1,11 @@
+#define FSMMANAGER_H
+
 #include <Arduino.h>
 #include <elapsedMillis.h>
 #include <shared-utils.h>
 #include <Fsm.h>
 
-#include <fsmManager.h>
+#include <FsmManager.h>
 FsmManager fsmManager;
 
 #include "state-machine.h"
