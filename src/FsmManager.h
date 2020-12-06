@@ -1,7 +1,8 @@
+#define FSMMANAGER_H
+
 #ifndef FSM_H
 #include <Arduino.h>
 #include <Fsm.h>
-// #include "Fsm/Fsm.h"
 #endif
 
 typedef const char *(*GetNameCallback)(uint8_t);
@@ -53,6 +54,11 @@ public:
   bool currentStateIs(uint8_t id)
   {
     return _fsm->getCurrentStateId() == id;
+  }
+
+  uint8_t lastEvent()
+  {
+    return _lastEvent;
   }
 
 private:
