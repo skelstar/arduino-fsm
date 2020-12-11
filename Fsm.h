@@ -54,7 +54,7 @@ public:
   void run_machine();
   int lastEvent();
   State *get_current_state();
-  uint8_t getCurrentId();
+  uint8_t getCurrentStateId();
   uint8_t get_from_state();
   void setGetEventName(GetEventNameCb getEventNameCb);
   void setEventTriggeredCb(EventTriggeredCb eventTriggeredCb);
