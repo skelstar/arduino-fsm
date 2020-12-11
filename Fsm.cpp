@@ -165,7 +165,7 @@ State *Fsm::get_current_state()
   return m_current_state;
 }
 
-uint8_t getCurrentId()
+uint8_t Fsm::getCurrentId()
 {
   return m_current_id;
 }
