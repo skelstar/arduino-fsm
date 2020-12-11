@@ -165,6 +165,11 @@ State *Fsm::get_current_state()
   return m_current_state;
 }
 
+uint8_t getCurrentId()
+{
+  return m_current_id;
+}
+
 int Fsm::lastEvent() { return _lastEvent; }
 
 void Fsm::make_transition(Transition *transition)
