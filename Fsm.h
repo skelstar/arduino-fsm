@@ -57,7 +57,7 @@ public:
   uint8_t getCurrentStateId();
   uint8_t get_from_state();
   void setGetEventName(GetEventNameCb getEventNameCb);
-  void setEventTriggeredCb(EventTriggeredCb eventTriggeredCb);
+  void setTriggeredCb(EventTriggeredCb eventTriggeredCb);
   void print(const char *stateName, bool includeEvent = true);
 
   bool revisit() { return _revisit; }

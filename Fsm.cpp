@@ -210,7 +210,7 @@ void Fsm::setGetEventName(GetEventNameCb getEventNameCb)
   _getEventNameCb = getEventNameCb;
 }
 
-void Fsm::setEventTriggeredCb(EventTriggeredCb eventTriggeredCb)
+void Fsm::setTriggeredCb(EventTriggeredCb eventTriggeredCb)
 {
   _eventTriggeredCb = eventTriggeredCb;
 }
