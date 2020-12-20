@@ -234,3 +234,8 @@ void Fsm::print(const char *stateName, bool includeEvent)
     Serial.printf("[%s] %s\n", debugTime, stateName);
   }
 }
+
+bool Fsm::transitionsSet()
+{
+  return m_num_transitions > 0;
+}

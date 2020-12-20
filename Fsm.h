@@ -59,6 +59,7 @@ public:
   void setGetEventName(GetEventNameCb getEventNameCb);
   void setTriggeredCb(EventTriggeredCb eventTriggeredCb);
   void print(const char *stateName, bool includeEvent = true);
+  bool transitionsSet();
 
   bool revisit() { return _revisit; }
 
