@@ -165,6 +165,11 @@ State *Fsm::get_current_state()
   return m_current_state;
 }
 
+uint8_t Fsm::getCurrentStateId()
+{
+  return m_current_id;
+}
+
 int Fsm::lastEvent() { return _lastEvent; }
 
 void Fsm::make_transition(Transition *transition)
@@ -205,7 +210,7 @@ void Fsm::setGetEventName(GetEventNameCb getEventNameCb)
   _getEventNameCb = getEventNameCb;
 }
 
-void Fsm::setEventTriggeredCb(EventTriggeredCb eventTriggeredCb)
+void Fsm::setTriggeredCb(EventTriggeredCb eventTriggeredCb)
 {
   _eventTriggeredCb = eventTriggeredCb;
 }
@@ -228,4 +233,9 @@ void Fsm::print(const char *stateName, bool includeEvent)
   {
     Serial.printf("[%s] %s\n", debugTime, stateName);
   }
+}
+
+bool Fsm::transitionsSet()
+{
+  return m_num_transitions > 0;
 }
